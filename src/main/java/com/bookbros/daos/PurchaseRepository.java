@@ -11,6 +11,6 @@ import com.bookbros.models.Purchase;
 
 @Repository
 public interface PurchaseRepository extends JpaRepository<Purchase, Integer>{
-    public abstract List<Purchase> findPurchasesByUserId(int id);
-	public abstract List<Purchase> findPurchasesByBookId(int id);	
+    public abstract List<Purchase> findByUserId(int id);
+	public abstract List<Purchase> findByBookId(int id);	
 }
