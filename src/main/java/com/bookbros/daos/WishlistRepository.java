@@ -9,6 +9,6 @@ import com.bookbros.models.Wishlist;
 
 @Repository
 public interface WishlistRepository extends JpaRepository<Wishlist, Integer>{
-    public abstract List<Wishlist> findWishlistByUserId(int id);
-	public abstract List<Wishlist> findWishlistByBookId(int id);
+    public abstract List<Wishlist> findByUserId(int id);
+	public abstract List<Wishlist> findByBookId(int id);
 }
