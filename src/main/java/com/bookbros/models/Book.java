@@ -37,7 +37,6 @@ public class Book {
 	public Book(String title, String author, double price, String published, String description,
 			String subjects, int inventory) {
 		super();
-		this.id = id;
 		this.title = title;
 		this.author = author;
 		this.price = price;
