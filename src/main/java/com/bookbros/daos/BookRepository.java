@@ -9,6 +9,6 @@ import com.bookbros.models.User;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Integer>{
-	User findByAuthorAndTitle(String author, String title);
+	Book findByAuthorAndTitle(String author, String title);
 	List<Book> findAllByAuthor(String author);
 }
