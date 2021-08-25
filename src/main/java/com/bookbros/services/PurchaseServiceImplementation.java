@@ -7,8 +7,10 @@ import com.bookbros.exceptions.PurchaseNotFoundException;
 import com.bookbros.models.Purchase;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class PurchaseServiceImplementation implements PurchaseService {
     
     private PurchaseRepository pr;

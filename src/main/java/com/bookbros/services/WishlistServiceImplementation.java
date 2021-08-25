@@ -7,7 +7,9 @@ import com.bookbros.exceptions.WishlistNotFoundException;
 import com.bookbros.models.Wishlist;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class WishlistServiceImplementation implements WishlistService {
 
     private WishlistRepository wr;
