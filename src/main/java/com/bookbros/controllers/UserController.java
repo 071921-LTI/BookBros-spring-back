@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bookbros.services.UserService;
-import com.bookbros.services.UserServiceImpl;
 import com.bookbros.models.User;
 
 @RestController
@@ -23,7 +22,7 @@ public class UserController {
 	private UserService us;
 	
 	@Autowired
-	public UserController(UserServiceImpl us) {
+	public UserController(UserService us) {
 		super();
 		this.us = us;
 	}
@@ -31,6 +30,11 @@ public class UserController {
     @GetMapping
     public ResponseEntity<String> firstRoute() {
         return new ResponseEntity<String>("it works!", HttpStatus.OK);
+    }
+    
+    @GetMapping(value="/{login}")
+    public ResponseEntity<String> loginRoute() {
+        return new ResponseEntity<String>("logged in", HttpStatus.OK);
     }
 
 	@GetMapping(value="/{id}")
@@ -40,8 +44,10 @@ public class UserController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<String> createUser(@Valid @RequestBody User user){
-        return null;
-	
+	public ResponseEntity<String> register(@Valid @RequestBody User user) {
+		if (!us.createUser(user)) {
+			return new ResponseEntity<String>("Username is already taken.", HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<>("Successfully created user.", HttpStatus.CREATED);
 	}
 }
