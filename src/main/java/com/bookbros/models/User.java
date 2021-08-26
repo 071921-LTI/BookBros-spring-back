@@ -52,7 +52,15 @@ public class User {
 	}
 
 
-	public int getId() {
+	public User(String username, String password, String role) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.role = role;
+    }
+
+
+    public int getId() {
 		return this.id;
 	}
 
