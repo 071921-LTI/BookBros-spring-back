@@ -8,7 +8,7 @@ import com.bookbros.models.Wishlist;
 public interface WishlistService {
     Wishlist getWishById(int id) throws WishlistNotFoundException;
     List<Wishlist> getAllWishes();
-    List<Wishlist> getWishlistByUserId(int id);
+    List<Wishlist> getWishlistByWisherId(int id);
     List<Wishlist> getWishesByBookId(int id);
     boolean addWish(Wishlist w);
     boolean deleteWish(Wishlist w);

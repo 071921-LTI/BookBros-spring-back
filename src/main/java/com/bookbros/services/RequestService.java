@@ -1,7 +1,5 @@
 package com.bookbros.services;
 
-
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bookbros.daos.RequestRepository;
 import com.bookbros.models.Request;
-import com.bookbros.models.User;
 
 @Service
 public class RequestService {
@@ -33,8 +30,8 @@ public class RequestService {
 	}
 	
 	@Transactional
-	public List<Request> getRequestsByUserId(int userId) {
-		return rr.findRequestsByUserId(userId);
+	public List<Request> getRequestsByRequesterId(int id) {
+		return rr.findRequestsByRequesterId(id);
 	}
 	
 	@Transactional
@@ -65,7 +62,7 @@ public class RequestService {
 		rr.save(req);
 		
 		//Request dbReq = getRequestById(req.getId());
-		if(rr.findRequestsByRequester(req.getRequester()) == req) {
+		if(rr.findRequestsByRequesterId(req.getRequester().getId()) == req) {
 			return true;
 		} else {
 			return false;

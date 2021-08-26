@@ -33,8 +33,8 @@ public class PurchaseServiceImplementation implements PurchaseService {
 
     @Override
     @Transactional
-    public List<Purchase> getPurchasesByUserId(int id) {
-        return pr.findByUserId(id);
+    public List<Purchase> getPurchasesByPurchaserId(int id) {
+        return pr.findByPurchaserId(id);
     }
 
     @Override
