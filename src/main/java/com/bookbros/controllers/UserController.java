@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bookbros.services.UserService;
+import com.bookbros.services.UserServiceImpl;
 import com.bookbros.models.User;
 
 @RestController
@@ -22,7 +23,7 @@ public class UserController {
 	private UserService us;
 	
 	@Autowired
-	public UserController(UserService us) {
+	public UserController(UserServiceImpl us) {
 		super();
 		this.us = us;
 	}
