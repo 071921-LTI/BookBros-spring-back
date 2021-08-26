@@ -47,6 +47,6 @@ public class UserController {
             return new ResponseEntity<String>("Username is already taken.", HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<String>("Successfully created user.", HttpStatus.OK);
+        return new ResponseEntity<String>("Successfully created user.", HttpStatus.CREATED);
 	}
 }
