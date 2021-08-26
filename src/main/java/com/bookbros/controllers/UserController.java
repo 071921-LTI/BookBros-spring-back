@@ -31,6 +31,11 @@ public class UserController {
     public ResponseEntity<String> firstRoute() {
         return new ResponseEntity<String>("it works!", HttpStatus.OK);
     }
+    
+    @GetMapping(value="/{login}")
+    public ResponseEntity<String> loginRoute() {
+        return new ResponseEntity<String>("logged in", HttpStatus.OK);
+    }
 
 	@GetMapping(value="/{id}")
 	public ResponseEntity<User> getById(@PathVariable("id") int id){
