@@ -30,5 +30,5 @@ public class Wishlist {
     @JoinColumn(name="book_id", nullable = false)
 	private Book book;
 	@Column(name = "date_added", updatable = false, columnDefinition = "timestamp default CURRENT_TIMESTAMP")
-	private Date date_added;
+	private Date dateAdded;
 }

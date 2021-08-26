@@ -8,7 +8,7 @@ import com.bookbros.models.Purchase;
 public interface PurchaseService {
     Purchase getPurchaseById(int id) throws PurchaseNotFoundException;
     List<Purchase> getAllPurchases();
-    List<Purchase> getPurchasesByUserId(int id);
+    List<Purchase> getPurchasesByPurchaserId(int id);
     List<Purchase> getPurchasesByBookId(int id);
     boolean addPurchase(Purchase p);
     boolean deletePurchase(Purchase p) throws PurchaseNotFoundException;

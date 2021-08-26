@@ -31,8 +31,8 @@ public class WishlistServiceImplementation implements WishlistService {
     }
 
     @Override
-    public List<Wishlist> getWishlistByUserId(int id) {
-        return wr.findByUserId(id);
+    public List<Wishlist> getWishlistByWisherId(int id) {
+        return wr.findByWisherId(id);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class WishlistServiceImplementation implements WishlistService {
     public boolean addWish(Wishlist w) {
         wr.save(w);
 
-        if (wr.getById(w.getId()) == null) {
+        if (wr.findById(w.getId()) == null) {
             return false;
         }
 
@@ -55,7 +55,7 @@ public class WishlistServiceImplementation implements WishlistService {
     public boolean deleteWish(Wishlist w) {
         wr.delete(w);
 
-        if (wr.findById(w.getId()).get() == null) {
+        if (wr.findById(w.getId()) == null) {
             return false;
         }
         

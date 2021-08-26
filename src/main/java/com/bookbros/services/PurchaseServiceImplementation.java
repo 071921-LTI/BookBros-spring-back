@@ -35,8 +35,8 @@ public class PurchaseServiceImplementation implements PurchaseService {
 
     @Override
     @Transactional
-    public List<Purchase> getPurchasesByUserId(int id) {
-        return pr.findByUserId(id);
+    public List<Purchase> getPurchasesByPurchaserId(int id) {
+        return pr.findByPurchaserId(id);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class PurchaseServiceImplementation implements PurchaseService {
     public boolean addPurchase(Purchase p) {
         pr.save(p);
 
-        if (pr.getById(p.getId()) == null) {
+        if (pr.findById(p.getId()) == null) {
             return false;
         }
         
@@ -62,7 +62,7 @@ public class PurchaseServiceImplementation implements PurchaseService {
     public boolean deletePurchase(Purchase p) throws PurchaseNotFoundException {
         pr.delete(p);
 
-        if (pr.findById(p.getId()).get() == null) {
+        if (pr.findById(p.getId()) == null) {
             return false;
         }
         

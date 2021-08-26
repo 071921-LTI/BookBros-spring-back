@@ -2,64 +2,14 @@ package com.bookbros.services;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.bookbros.daos.BookRepository;
+import com.bookbros.exceptions.BookNotFoundException;
 import com.bookbros.models.Book;
 
-public class BookService {
-	
-	private BookRepository br;
-
-	@Autowired
-	public BookService(BookRepository br) {
-		super();
-		this.br = br;
-	}
-	
-	@Transactional
-	public Book getByAuthorAndTitle(String author, String title) {
-		return br.findByAuthorAndTitle(author, title);
-	}
-	
-	@Transactional
-	public List<Book> getBooks() {
-		return br.findAll();
-	}
-	
-	@Transactional
-	public List<Book> getBooksByAuthor(String author) {
-		return br.findAllByAuthor(author);
-	}
-	
-	@Transactional
-	public boolean createBook(Book b) {
-		br.save(b);
-
-		if(br.findById(b.getId()) == null) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-	
-	@Transactional
-	public boolean deleteBook(Book b) {
-		br.delete(b);
-		if(br.findById(b.getId()) == null) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public boolean updateBook(Book b) {
-		br.save(b);
-		if (br.findByAuthorAndTitle(b.getAuthor(), b.getTitle()) == b) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+public interface BookService {
+	public abstract Book getByAuthorAndTitle(String author, String title) throws BookNotFoundException;
+	public abstract List<Book> getBooks();
+	public abstract List<Book> getBooksByAuthor(String author);
+	public abstract boolean createBook(Book b);
+	public abstract boolean deleteBook(Book b) throws BookNotFoundException;
+	public abstract boolean updateBook(Book b) throws BookNotFoundException;
 }

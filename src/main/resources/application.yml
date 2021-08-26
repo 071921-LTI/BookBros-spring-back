@@ -12,3 +12,9 @@ spring:
   jackson:
     serialization:
       fail-on-empty-beans: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
