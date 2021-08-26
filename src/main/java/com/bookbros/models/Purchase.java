@@ -25,10 +25,10 @@ public class Purchase {
 	private int id;
 	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity=User.class )
     @JoinColumn(name="user_id", nullable = false)
-	private User purchaser_id;
+	private User purchaser;
 	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity=Book.class )
     @JoinColumn(name="book_id", nullable = false)
 	private Book book;
 	@Column(name = "date_purchased", updatable=false, columnDefinition="timestamp default CURRENT_TIMESTAMP")
-	private Date date_purchased;
+	private Date datePurchased;
 }

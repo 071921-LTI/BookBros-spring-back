@@ -33,8 +33,8 @@ public class RequestService {
 	}
 	
 	@Transactional
-	public List<Request> getRequestsByUserId(int userId) {
-		return rr.findRequestsByUserId(userId);
+	public List<Request> getRequestsByRequester(User requester) {
+		return rr.findRequestsByRequester(requester);
 	}
 	
 	@Transactional
