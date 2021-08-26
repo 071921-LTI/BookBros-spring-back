@@ -62,7 +62,7 @@ public class RequestService {
 		rr.save(req);
 		
 		//Request dbReq = getRequestById(req.getId());
-		if(rr.findRequestsByRequesterId(req.getRequester().getId()) == req) {
+		if(rr.findByRequesterAndTitle(req.getRequester(), req.getTitle()) == req) {
 			return true;
 		} else {
 			return false;
