@@ -5,12 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import com.bookbros.models.Book;
-import com.bookbros.models.User;
 import com.bookbros.models.Wishlist;
 
 @Repository
 public interface WishlistRepository extends JpaRepository<Wishlist, Integer>{
-    public abstract List<Wishlist> findByWisher(User wisher);
-	public abstract List<Wishlist> findByBook(Book book);
+    public abstract List<Wishlist> findByWisherId(int id);
+	public abstract List<Wishlist> findByBookId(int id);
 }

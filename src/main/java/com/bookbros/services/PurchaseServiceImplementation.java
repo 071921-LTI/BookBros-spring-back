@@ -4,9 +4,7 @@ import java.util.List;
 
 import com.bookbros.daos.PurchaseRepository;
 import com.bookbros.exceptions.PurchaseNotFoundException;
-import com.bookbros.models.Book;
 import com.bookbros.models.Purchase;
-import com.bookbros.models.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,14 +33,14 @@ public class PurchaseServiceImplementation implements PurchaseService {
 
     @Override
     @Transactional
-    public List<Purchase> getPurchasesByPurchaser(User purchaser) {
-        return pr.findByPurchaser(purchaser);
+    public List<Purchase> getPurchasesByPurchaserId(int id) {
+        return pr.findByPurchaserId(id);
     }
 
     @Override
     @Transactional
-    public List<Purchase> getPurchasesByBook(Book book) {
-        return pr.findByBook(book);
+    public List<Purchase> getPurchasesByBookId(int id) {
+        return pr.findByBookId(id);
     }
 
     @Override

@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.bookbros.daos.WishlistRepository;
 import com.bookbros.exceptions.WishlistNotFoundException;
-import com.bookbros.models.Book;
-import com.bookbros.models.User;
 import com.bookbros.models.Wishlist;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +29,13 @@ public class WishlistServiceImplementation implements WishlistService {
     }
 
     @Override
-    public List<Wishlist> getWishlistByWisher(User wisher) {
-        return wr.findByWisher(wisher);
+    public List<Wishlist> getWishlistByWisherId(int id) {
+        return wr.findByWisherId(id);
     }
 
     @Override
-    public List<Wishlist> getWishesByBook(Book book) {
-        return wr.findByBook(book);
+    public List<Wishlist> getWishesByBookId(int id) {
+        return wr.findByBookId(id);
     }
 
     @Override
