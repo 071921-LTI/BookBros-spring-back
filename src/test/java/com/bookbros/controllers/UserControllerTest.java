@@ -18,6 +18,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.bookbros.models.User;
 import com.bookbros.services.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebMvcTest(UserController.class)
 public class UserControllerTest {
@@ -48,12 +50,32 @@ public class UserControllerTest {
 
     @Test
     public void registerSuccess() throws Exception {
-        when(mockUserService.createUser(new User("testUser", "password"))).thenReturn(true);
+        when(mockUserService.createUser(new User("testUser", "password", "customer"))).thenReturn(true);
 
         mockMvc.perform(post("/users")
+                .content(convertToJson(new User("testUser", "password", "customer")))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$").value(true));
+                .andExpect(jsonPath("$").value("Successfully created user."));
     }
+
+    @Test
+    public void registerFail() throws Exception {
+        when(mockUserService.createUser(new User("testUser", "password", "customer"))).thenReturn(false);
+
+        mockMvc.perform(post("/users")
+                .content(convertToJson(new User("testUser", "password", "customer")))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$").value("Username is already taken."));
+    }
+
+    public static String convertToJson(User user) {
+		try {
+			return new ObjectMapper().writeValueAsString(user);
+		} catch (JsonProcessingException e) {
+			throw new RuntimeException();
+		}
+	}
 	
 }

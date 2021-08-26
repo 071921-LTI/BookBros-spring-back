@@ -40,13 +40,9 @@ public class UserController {
 	
 	@PostMapping
 	public ResponseEntity<String> register(@Valid @RequestBody User user) {
-
-        boolean created = us.createUser(user);
-
-        if (!created) {
-            return new ResponseEntity<String>("Username is already taken.", HttpStatus.BAD_REQUEST);
-        }
-
-        return new ResponseEntity<String>("Successfully created user.", HttpStatus.CREATED);
+		if (!us.createUser(user)) {
+			return new ResponseEntity<String>("Username is already taken.", HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<>("Successfully created user.", HttpStatus.CREATED);
 	}
 }
