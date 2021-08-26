@@ -7,8 +7,10 @@ import com.bookbros.exceptions.PurchaseNotFoundException;
 import com.bookbros.models.Purchase;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class PurchaseServiceImplementation implements PurchaseService {
     
     private PurchaseRepository pr;
@@ -48,7 +50,7 @@ public class PurchaseServiceImplementation implements PurchaseService {
     public boolean addPurchase(Purchase p) {
         pr.save(p);
 
-        if (pr.getById(p.getId()) == null) {
+        if (pr.findById(p.getId()) == null) {
             return false;
         }
         
@@ -60,7 +62,7 @@ public class PurchaseServiceImplementation implements PurchaseService {
     public boolean deletePurchase(Purchase p) throws PurchaseNotFoundException {
         pr.delete(p);
 
-        if (pr.findById(p.getId()).get() == null) {
+        if (pr.findById(p.getId()) == null) {
             return false;
         }
         

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bookbros.services.UserService;
-import com.bookbros.services.UserServiceImpl;
 import com.bookbros.models.User;
 
 @RestController
@@ -23,7 +22,7 @@ public class UserController {
 	private UserService us;
 	
 	@Autowired
-	public UserController(UserServiceImpl us) {
+	public UserController(UserService us) {
 		super();
 		this.us = us;
 	}
@@ -40,8 +39,14 @@ public class UserController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<String> createUser(@Valid @RequestBody User user){
-        return null;
-	
+	public ResponseEntity<String> register(@Valid @RequestBody User user) {
+
+        boolean created = us.createUser(user);
+
+        if (!created) {
+            return new ResponseEntity<String>("Username is already taken.", HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<String>("Successfully created user.", HttpStatus.OK);
 	}
 }
