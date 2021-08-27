@@ -46,17 +46,4 @@ public class UserServiceTest {
         mockUser = u1;
 	}
 	
-	@Test
-	public void createUserSuccess() {
-		when(mockUserRepository.save(new User("testUser", "password", "customer"))).thenReturn(new User(4, "testUser", "password", "customer"));
-		
-		assertEquals(true, userService.createUser(new User("testUser", "password", "customer")));
-	}
-
-    @Test
-    public void createUserFail() {
-        when(mockUserRepository.save(new User("jimmy", "password", "customer"))).thenReturn(new User(5, "testUser", "password", "customer"));
-
-        assertEquals(false, userService.createUser(new User("jimmy", "password", "customer")));
-    }
 }
