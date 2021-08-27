@@ -1,11 +1,14 @@
 package com.bookbros.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.bookbros.daos.UserRepository;
+import com.bookbros.dtos.Credentials;
 import com.bookbros.exceptions.UserNotFoundException;
 import com.bookbros.models.User;
 
+@Service
 public class LoginServiceImpl implements LoginService {
 
 	UserRepository ur;
@@ -16,14 +19,15 @@ public class LoginServiceImpl implements LoginService {
         this.ur = ur;
     }
 
-	@Override
-	public User login(String username, String password) throws UserNotFoundException {
-		User user = ur.findByUsername(username);
-		if (user.getPassword().equals(password)) {
-			return user;
-		} else {
+    @Override
+	public String login(Credentials creds) {
+		User user = ur.findByUsername(creds.getUsername());
+		
+		if(user == null || !user.getPassword().equals(creds.getPassword())) {
 			return null;
 		}
+		
+		return user.getId()+":"+user.getRole().toString();
 	}
 
 	@Override
