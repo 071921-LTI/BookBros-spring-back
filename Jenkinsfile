@@ -4,7 +4,7 @@ pipeline {
     environment {
         PORT_HOST="8081"
         PORT_CONT="8080"
-        IMAGE_TAG="Bookbros-spring-back"
+        IMAGE_TAG="bookbros-spring-back"
         CONTAINER_NAME="bookbros-app"
         DB_URL=credentials('DB_URL')
         DB_USER=credentials('DB_USER')
