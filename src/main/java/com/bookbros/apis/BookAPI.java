@@ -27,11 +27,19 @@ public class BookAPI {
 		JSONObject titleJsonOjbect =  getJsonData(titleUrl);
 		
 		// get the book ISBN from the book-title API call
+		JSONArray docsArray = titleJsonOjbect
+				.getJSONArray("docs");
 		
+		JSONObject firstObj = docsArray.getJSONObject(0);
 		
-		
-		
-		String isbn = "";
+//		String isbn = titleJsonOjbect
+//				.getJSONArray("docs")
+//				.getJSONArray("isbn")
+				
+						
+				
+				
+				
 		
 		// put the ISBN in the ISBN API call
 		String isbnUrl = "http://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json";
