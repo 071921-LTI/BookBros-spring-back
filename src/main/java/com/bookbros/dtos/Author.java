@@ -1,4 +1,4 @@
-package com.bookbros.models;
+package com.bookbros.dtos;
 
 import lombok.Data;
 
