@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bookbros.services.UserService;
 import com.bookbros.apis.BookAPI;
-import com.bookbros.models.Author;
-import com.bookbros.models.AuthorsSearchResult;
+import com.bookbros.dtos.Author;
+import com.bookbros.dtos.AuthorsSearchResult;
 import com.bookbros.models.User;
 
 @RestController

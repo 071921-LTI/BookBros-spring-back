@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.bookbros.apis.BookJsonConvertModel.Author;
-import com.bookbros.models.AuthorsSearchResult;
+import com.bookbros.dtos.AuthorsSearchResult;
 import com.bookbros.models.Book;
 
 import org.json.*;
