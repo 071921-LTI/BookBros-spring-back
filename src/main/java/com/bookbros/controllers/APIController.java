@@ -13,37 +13,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bookbros.services.UserService;
+import com.bookbros.apis.BookAPI;
+import com.bookbros.models.Author;
+import com.bookbros.models.AuthorsSearchResult;
 import com.bookbros.models.User;
 
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/api")
+public class APIController {
 
-	private UserService us;
+	private BookAPI bookApi;
 	
 	@Autowired
-	public UserController(UserService us) {
+	public APIController(BookAPI bookApi) {
 		super();
-		this.us = us;
+		this.bookApi = bookApi;
 	}
 
-    @GetMapping
-    public ResponseEntity<String> firstRoute() {
-        return new ResponseEntity<String>("it works!", HttpStatus.OK);
+    @GetMapping(value="/authors")
+    public ResponseEntity<AuthorsSearchResult> searchAuthors(@RequestBody Author author) {
+        return new ResponseEntity<>(bookApi.searchAuthors(author.getName()), HttpStatus.OK);
     }
-
-	@GetMapping(value="/{id}")
-	public ResponseEntity<User> getById(@PathVariable("id") int id){
-        return null;
-		
-	}
-	
-	@PostMapping
-	public ResponseEntity<String> register(@Valid @RequestBody User user) {
-		if (us.createUser(user)) {
-			return new ResponseEntity<>("Successfully created user.", HttpStatus.CREATED);
-		}
-
-		return new ResponseEntity<String>("Username is already taken.", HttpStatus.BAD_REQUEST);
-	}
 }
