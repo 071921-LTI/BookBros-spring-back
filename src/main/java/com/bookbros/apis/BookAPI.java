@@ -7,8 +7,11 @@ import java.util.List;
 import java.util.Scanner;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.bookbros.apis.BookJsonConvertModel.Author;
+import com.bookbros.models.AuthorsSearchResult;
 import com.bookbros.models.Book;
 
 import org.json.*;
@@ -17,7 +20,7 @@ import org.json.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-
+@Component
 public class BookAPI {
 	
 	public static Book findBookByTitle(String title) {
@@ -100,6 +103,21 @@ public class BookAPI {
             e.printStackTrace();
         }
 		return data_obj;
+	}
+
+	public AuthorsSearchResult searchAuthors(String authorName) {
+		
+		String url = "https://openlibrary.org/search/authors.json?q=" + authorName;
+
+		RestTemplate rt = new RestTemplate();
+		ResponseEntity<AuthorsSearchResult> response =
+					rt.getForEntity(
+					url,
+					AuthorsSearchResult.class);
+		AuthorsSearchResult result = response.getBody();
+
+		return result;
+	
 	}
 	
 }
