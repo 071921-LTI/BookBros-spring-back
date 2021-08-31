@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bookbros.services.UserService;
 import com.bookbros.apis.BookAPI;
-import com.bookbros.dtos.Author;
-import com.bookbros.dtos.AuthorsSearchResult;
-import com.bookbros.models.User;
+import com.bookbros.dtos.SearchResult;
 
 @RestController
 @RequestMapping("/api")
@@ -30,8 +28,8 @@ public class APIController {
 		this.bookApi = bookApi;
 	}
 
-    @GetMapping(value="/authors")
-    public ResponseEntity<AuthorsSearchResult> searchAuthors(@RequestBody Author author) {
-        return new ResponseEntity<>(bookApi.searchAuthors(author.getName()), HttpStatus.OK);
+    @GetMapping(value="/authors/{authorName}")
+    public ResponseEntity<SearchResult> searchAuthors(@PathVariable("authorName") String authorName) {
+        return new ResponseEntity<>(bookApi.searchAuthors(authorName), HttpStatus.OK);
     }
 }
