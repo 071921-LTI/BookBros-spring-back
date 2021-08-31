@@ -24,13 +24,11 @@ import com.bookbros.models.User;
 public class BookController {
 
 	private BookService bs;
-    private BookAPI ba;
 	
 	@Autowired
-	public BookController(BookService bs, BookAPI ba) {
+	public BookController(BookService bs) {
 		super();
 		this.bs = bs;
-        this.ba = ba;
 	}
 
     @GetMapping
@@ -39,8 +37,8 @@ public class BookController {
     }
 	
 	@PostMapping
-	public ResponseEntity<SelectedBook> addBook(@RequestBody Work work) {
-
-		return new ResponseEntity<>(ba.getSelectedBook(work.getKey()), HttpStatus.OK);
+	public ResponseEntity<String> addBook(@RequestBody Work work) {
+		boolean addedBook = bs.createBook(work);
+        return new ResponseEntity<>("done", HttpStatus.OK);
 	}
 }
