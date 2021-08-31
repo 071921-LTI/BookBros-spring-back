@@ -23,7 +23,7 @@ import java.net.URL;
 @Component
 public class BookAPI {
 	
-<<<<<<< HEAD
+
 	public static Book findBookByTitle(String title) {
 		String titleUrl = "http://openlibrary.org/search.json?title=" + title;
 		
@@ -66,8 +66,7 @@ public class BookAPI {
 //		return b;
 	}
 	
-=======
->>>>>>> f40f9a93333ad59e4867fbd10a068d96bc29ce95
+
 	public static JSONObject getJsonData(String jsonUrl) {
 		
 		JSONObject data_obj = null;
