@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bookbros.daos.UserRepository;
+import com.bookbros.exceptions.UserNotFoundException;
 import com.bookbros.models.User;
 
 @Service
@@ -23,8 +24,8 @@ public class UserServiceImpl implements UserService {
 	
 
 	@Transactional
-	public Optional<User> getById(int id) {
-		return ur.findById(id);
+	public User getById(int id) throws UserNotFoundException {
+		return ur.findById(id).orElseThrow(UserNotFoundException::new);
 	}
 	
 	@Transactional

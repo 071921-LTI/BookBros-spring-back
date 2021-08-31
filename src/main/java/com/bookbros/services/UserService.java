@@ -7,7 +7,7 @@ import com.bookbros.exceptions.UserNotFoundException;
 import com.bookbros.models.User;
 
 public interface UserService {
-	public abstract Optional<User> getById(int id) throws UserNotFoundException;
+	public abstract User getById(int id) throws UserNotFoundException;
 	public abstract User getUserByUsername(String username) throws UserNotFoundException;
 	public abstract List<User> getUsers();
 	public abstract boolean createUser(User u);
