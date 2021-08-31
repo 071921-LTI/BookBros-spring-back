@@ -24,47 +24,47 @@ import java.net.URL;
 public class BookAPI {
 	
 
-	public static Book findBookByTitle(String title) {
-		String titleUrl = "http://openlibrary.org/search.json?title=" + title;
-		
-		// get a jsonobject from the serch-by-title API
-		JSONObject titleJsonOjbect =  getJsonData(titleUrl);
-		
-		// get the book ISBN from the book-title API call
-		JSONArray docsArray = titleJsonOjbect
-				.getJSONArray("docs");
-		
-		JSONObject firstObj = docsArray.getJSONObject(0);
-		
-//		String isbn = titleJsonOjbect
-//				.getJSONArray("docs")
-//				.getJSONArray("isbn")
-				
-						
-				
-				
-				
-		
-		// put the ISBN in the ISBN API call
-		String isbnUrl = "http://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json";
-		
-		// get the book info and convert it into a java Book object 
-		String jsonBookString = "";
-		JSONObject jsonBook = new JSONObject();
-		
-		String bookTitle;
-		String bookAuthor;
-		String bookPublished;
-		String bookDescription;
-		String bookSubjects;
-		
-		
-		
-//		RestTemplate rt = new RestTemplate();
-//		Book b = rt.getForObject(url + title, Book.class);
+//	public static Book findBookByTitle(String title) {
+//		String titleUrl = "http://openlibrary.org/search.json?title=" + title;
 //		
-//		return b;
-	}
+//		// get a jsonobject from the serch-by-title API
+//		JSONObject titleJsonOjbect =  getJsonData(titleUrl);
+//		
+//		// get the book ISBN from the book-title API call
+//		JSONArray docsArray = titleJsonOjbect
+//				.getJSONArray("docs");
+//		
+//		JSONObject firstObj = docsArray.getJSONObject(0);
+//		
+////		String isbn = titleJsonOjbect
+////				.getJSONArray("docs")
+////				.getJSONArray("isbn")
+//				
+//						
+//				
+//				
+//				
+//		
+//		// put the ISBN in the ISBN API call
+//		String isbnUrl = "http://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json";
+//		
+//		// get the book info and convert it into a java Book object 
+//		String jsonBookString = "";
+//		JSONObject jsonBook = new JSONObject();
+//		
+//		String bookTitle;
+//		String bookAuthor;
+//		String bookPublished;
+//		String bookDescription;
+//		String bookSubjects;
+//		
+//		
+//		
+////		RestTemplate rt = new RestTemplate();
+////		Book b = rt.getForObject(url + title, Book.class);
+////		
+////		return b;
+//	}
 	
 
 	public static JSONObject getJsonData(String jsonUrl) {
