@@ -32,40 +32,40 @@ public class SecurityAspect {
 		this.us = us;
 	}
 
-	@Around("@annotation(com.revature.annotations.Secured)")
-	public Object secureEndpoint(ProceedingJoinPoint pjp) throws Throwable {
+	// @Around("@annotation(com.bookbros.annotations.Secured)")
+	// public Object secureEndpoint(ProceedingJoinPoint pjp) throws Throwable {
 		
-		/*
-		 * Retrieve the method with @Secured
-		 * Retrieve the annotation itself
-		 */
-		Method method =((MethodSignature) pjp.getSignature()).getMethod();
-		Secure securedAnnotation = method.getAnnotation(Secure.class);
+	// 	/*
+	// 	 * Retrieve the method with @Secured
+	// 	 * Retrieve the annotation itself
+	// 	 */
+	// 	Method method =((MethodSignature) pjp.getSignature()).getMethod();
+	// 	Secure securedAnnotation = method.getAnnotation(Secure.class);
 		
-		/*
-		 * Retrieving allowed roles for that controller method
-		 */
-		List<String> allowedRoles = Arrays.asList(securedAnnotation.allowedRoles());
+	// 	/*
+	// 	 * Retrieving allowed roles for that controller method
+	// 	 */
+	// 	List<String> allowedRoles = Arrays.asList(securedAnnotation.allowedRoles());
 		
-		/*
-		 * Verify user role
-		 * 	token: id:role
-		 */
-		String token = request.getHeader("Authorization");
-		if(token == null) {
-			throw new AuthenticationException();
-		}
+	// 	/*
+	// 	 * Verify user role
+	// 	 * 	token: id:role
+	// 	 */
+	// 	String token = request.getHeader("Authorization");
+	// 	if(token == null) {
+	// 		throw new AuthenticationException();
+	// 	}
 		
-		String[] tokens = token.split(":");
+	// 	String[] tokens = token.split(":");
 		
-		User authUser = us.getById(Integer.valueOf(tokens[0]));
+	// 	User authUser = us.getById(Integer.valueOf(tokens[0]));
 		
-		if(authUser == null || !authUser.getRole().toString().equals(tokens[1]) || !allowedRoles.contains(authUser.getRole().toString())) {
-			throw new AuthorizationException();
-		} 
+	// 	if(authUser == null || !authUser.getRole().toString().equals(tokens[1]) || !allowedRoles.contains(authUser.getRole().toString())) {
+	// 		throw new AuthorizationException();
+	// 	} 
 		
-		Object target = pjp.proceed();
+	// 	Object target = pjp.proceed();
 		
-		return target;
-	}
+	// 	return target;
+	// }
 }
