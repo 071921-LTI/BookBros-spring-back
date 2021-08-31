@@ -32,7 +32,7 @@ public class SecurityAspect {
 		this.us = us;
 	}
 
-	@Around("@annotation(com.revature.annotations.Secured)")
+	@Around("@annotation(com.bookbros.annotations.Secure)")
 	public Object secureEndpoint(ProceedingJoinPoint pjp) throws Throwable {
 		
 		/*
