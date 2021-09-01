@@ -37,7 +37,6 @@ public class SecurityAspect {
 
 	// @Around("@annotation(com.bookbros.annotations.Secured)")
 	// public Object secureEndpoint(ProceedingJoinPoint pjp) throws Throwable {
-
 		
 	// 	/*
 	// 	 * Retrieve the method with @Secured
