@@ -35,7 +35,7 @@ public class BookController {
 	
 	@PostMapping
 	public ResponseEntity<String> addBook(@RequestBody Work work) {
-		boolean addedBook = bs.createBook(work);
+		bs.createBook(work);
         return new ResponseEntity<>("done", HttpStatus.OK);
 	}
 }

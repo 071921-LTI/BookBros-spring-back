@@ -1,9 +1,5 @@
 package com.bookbros.apis;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 import org.springframework.http.ResponseEntity;
@@ -11,8 +7,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.bookbros.dtos.SearchResult;
-import com.bookbros.dtos.SelectedBook;
-import com.bookbros.models.Book;
 
 import org.json.*;
 //import org.json.simple.parser.JSONParser;
@@ -22,8 +16,13 @@ import java.net.URL;
 
 @Component
 public class BookAPI {
+
+
+
+
 	
 	public JSONObject getSelectedBook(String key) {
+
 		
 		JSONObject data_obj = null;
 		
@@ -50,9 +49,6 @@ public class BookAPI {
                 scanner.close();
                 
             }
-            
-//            JSONParser parse = new JSONParser();
-//            JSONObject data_obj = (JSONObject) parse.parse(inline);
             	data_obj = new JSONObject(inline);
             
             
@@ -77,5 +73,21 @@ public class BookAPI {
 		return result;
 	
 	}
-	
+
+
+	public SearchResult searchTitle(String title) {
+		
+		String url = "http://openlibrary.org/search.json?title= " + title;
+		
+		RestTemplate rt = new RestTemplate();
+		ResponseEntity<SearchResult> response =
+					rt.getForEntity(
+					url,
+					SearchResult.class);
+		SearchResult result = response.getBody();
+
+		return result;
+			
+	}	
 }
+
