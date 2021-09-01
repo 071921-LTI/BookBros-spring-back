@@ -47,6 +47,8 @@ public class BookServiceImpl implements BookService {
 
 		Book newBook = new Book(selectedBook.getTitle(), work.getAuthor_name()[0], work.getPrice(), String.valueOf(work.getFirst_publish_year()), selectedBook.getDescription(), String.join(", ", selectedBook.getSubjects()), work.getInventory());
 		
+		System.out.println(newBook);
+		
 		br.save(newBook);
 
 		if(br.findById(newBook.getId()) == null) {

@@ -32,4 +32,9 @@ public class APIController {
     public ResponseEntity<SearchResult> searchAuthors(@PathVariable("authorName") String authorName) {
         return new ResponseEntity<>(bookApi.searchAuthors(authorName), HttpStatus.OK);
     }
+    
+    @GetMapping(value="/title/{title}")
+    public ResponseEntity<SearchResult> searchTitle(@PathVariable("title") String title) {
+    	return new ResponseEntity<>(bookApi.searchTitle(title), HttpStatus.OK);
+    }
 }
