@@ -35,7 +35,7 @@ public class Book {
 	private String subjects;
 	@Column(name = "inventory")
 	private int inventory;
-
+	
 	public Book() {
 		super();
 	}
