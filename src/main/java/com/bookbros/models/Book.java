@@ -29,10 +29,21 @@ public class Book {
 	private double price;
 	@Column(name = "published", nullable = false)
 	private String published;
-	@Column(name = "description", nullable = false)
+	@Column(name = "description", nullable = false, columnDefinition = "TEXT")
 	private String description;
-	@Column(name = "subjects", nullable = false)
+	@Column(name = "subjects", nullable = false, columnDefinition = "TEXT")
 	private String subjects;
 	@Column(name = "inventory")
 	private int inventory;
+
+	public Book(String title, String author, double price, String published, String description, String subjects, int inventory) {
+		super();
+		this.title = title;
+		this.author = author;
+		this.price = price;
+		this.published = published;
+		this.description = description;
+		this.subjects = subjects;
+		this. inventory = inventory;
+	}
 }
