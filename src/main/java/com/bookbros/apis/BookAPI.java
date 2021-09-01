@@ -23,12 +23,12 @@ import java.net.URL;
 @Component
 public class BookAPI {
 	
-	public static JSONObject getJsonData(String jsonUrl) {
+	public JSONObject getSelectedBook(String key) {
 		
 		JSONObject data_obj = null;
 		
 		try {
-			URL url = new URL(jsonUrl);
+			URL url = new URL("https://openlibrary.org/" + key + ".json");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.connect();
@@ -78,13 +78,13 @@ public class BookAPI {
 	
 	}
 
-	public SelectedBook getSelectedBook(String key) {
-		String url = "https://openlibrary.org/" + key + ".json";
+	// public SelectedBook getSelectedBook(String key) {
+	// 	String url = "https://openlibrary.org/" + key + ".json";
 
-		RestTemplate rt = new RestTemplate();
-		SelectedBook book = rt.getForObject(url, SelectedBook.class);
+	// 	RestTemplate rt = new RestTemplate();
+	// 	SelectedBook book = rt.getForObject(url, SelectedBook.class);
 
-		return book;
-	}
+	// 	return book;
+	// }
 	
 }
