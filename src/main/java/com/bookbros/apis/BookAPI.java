@@ -7,8 +7,11 @@ import java.util.List;
 import java.util.Scanner;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.bookbros.dtos.SearchResult;
+import com.bookbros.dtos.SelectedBook;
 import com.bookbros.models.Book;
 
 import org.json.*;
@@ -17,49 +20,20 @@ import org.json.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-
+@Component
 public class BookAPI {
+
+
+
+
 	
-	public static Book findBookByTitle(String title) {
-		String titleUrl = "http://openlibrary.org/search.json?title=" + title;
-		
-		// get a jsonobject from the serch-by-title API
-		JSONObject titleJsonOjbect =  getJsonData(titleUrl);
-		
-		// get the book ISBN from the book-title API call
-		
-		
-		
-		
-		String isbn = "";
-		
-		// put the ISBN in the ISBN API call
-		String isbnUrl = "http://openlibrary.org/api/volumes/brief/isbn/" + isbn + ".json";
-		
-		// get the book info and convert it into a java Book object 
-		String jsonBookString = "";
-		JSONObject jsonBook = new JSONObject();
-		
-		String bookTitle;
-		String bookAuthor;
-		String bookPublished;
-		String bookDescription;
-		String bookSubjects;
-		
-		
-		
-//		RestTemplate rt = new RestTemplate();
-//		Book b = rt.getForObject(url + title, Book.class);
-//		
-//		return b;
-	}
-	
-	public static JSONObject getJsonData(String jsonUrl) {
+	public JSONObject getSelectedBook(String key) {
+
 		
 		JSONObject data_obj = null;
 		
 		try {
-			URL url = new URL(jsonUrl);
+			URL url = new URL("https://openlibrary.org/" + key + ".json");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.connect();
@@ -81,9 +55,6 @@ public class BookAPI {
                 scanner.close();
                 
             }
-            
-//            JSONParser parse = new JSONParser();
-//            JSONObject data_obj = (JSONObject) parse.parse(inline);
             	data_obj = new JSONObject(inline);
             
             
@@ -93,5 +64,36 @@ public class BookAPI {
         }
 		return data_obj;
 	}
+
+	public SearchResult searchAuthors(String authorName) {
+		
+		String url = "https://openlibrary.org/search.json?author=" + authorName;
+
+		RestTemplate rt = new RestTemplate();
+		ResponseEntity<SearchResult> response =
+					rt.getForEntity(
+					url,
+					SearchResult.class);
+		SearchResult result = response.getBody();
+
+		return result;
 	
+	}
+
+
+	public SearchResult searchTitle(String title) {
+		
+		String url = "http://openlibrary.org/search.json?title= " + title;
+		
+		RestTemplate rt = new RestTemplate();
+		ResponseEntity<SearchResult> response =
+					rt.getForEntity(
+					url,
+					SearchResult.class);
+		SearchResult result = response.getBody();
+
+		return result;
+			
+	}	
 }
+
