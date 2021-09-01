@@ -31,4 +31,14 @@ public class Purchase {
 	private Book book;
 	@Column(name = "date_purchased", updatable=false, columnDefinition="timestamp default CURRENT_TIMESTAMP")
 	private Date datePurchased;
+	
+	public Purchase() {
+		super();
+	}
+	
+	public Purchase(User purchaser, Book book) {
+		super();
+		this.purchaser = purchaser;
+		this.book = book;
+	}
 }
