@@ -36,6 +36,10 @@ public class Book {
 	@Column(name = "inventory")
 	private int inventory;
 
+	public Book() {
+		super();
+	}
+
 	public Book(String title, String author, double price, String published, String description, String subjects, int inventory) {
 		super();
 		this.title = title;

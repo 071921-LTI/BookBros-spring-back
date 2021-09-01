@@ -77,14 +77,5 @@ public class BookAPI {
 		return result;
 	
 	}
-
-	// public SelectedBook getSelectedBook(String key) {
-	// 	String url = "https://openlibrary.org/" + key + ".json";
-
-	// 	RestTemplate rt = new RestTemplate();
-	// 	SelectedBook book = rt.getForObject(url, SelectedBook.class);
-
-	// 	return book;
-	// }
 	
 }
