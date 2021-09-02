@@ -10,7 +10,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
+@Data
 @Table(name = "requests")
 public class Request {
 	
@@ -39,6 +42,7 @@ public class Request {
 		this.author = author;
 		this.description = description;
 	}
+	 
 	
 	public int getId() {
 		return id;
