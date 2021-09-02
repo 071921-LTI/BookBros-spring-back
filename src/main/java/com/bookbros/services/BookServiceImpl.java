@@ -113,6 +113,7 @@ public class BookServiceImpl implements BookService {
 		}
 	}
 	
+	@Transactional
 	public boolean updateBook(Book b) {
 		br.save(b);
 		if (br.findByAuthorAndTitle(b.getAuthor(), b.getTitle()) == b) {
@@ -120,5 +121,10 @@ public class BookServiceImpl implements BookService {
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public List<Book> getBooksWithInventory() {
+		return br.findByInventoryGreaterThan(0);
 	}
 }
