@@ -10,4 +10,5 @@ import com.bookbros.models.Book;
 public interface BookRepository extends JpaRepository<Book, Integer>{
 	Book findByAuthorAndTitle(String author, String title);
 	List<Book> findAllByAuthor(String author);
+	List<Book> findByInventoryGreaterThan(int inventory);
 }

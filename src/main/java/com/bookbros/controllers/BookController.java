@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,8 +30,17 @@ public class BookController {
 	}
 
     @GetMapping
-	public List<Book> getAllBooks(){
-		return bs.getBooks();
+	public ResponseEntity<List<Book>> getAllBooks(@RequestHeader("Authorization") String auth){
+
+		String role = auth.split(":")[1];
+
+		if (role.equals("Employee")) {
+			return new ResponseEntity<>(bs.getBooks(), HttpStatus.OK);
+		} else if (role.equals("Customer")) {
+			return new ResponseEntity<>(bs.getBooksWithInventory(), HttpStatus.OK);
+		}
+
+		return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 	
 	@PostMapping
