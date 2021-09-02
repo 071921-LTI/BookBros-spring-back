@@ -1,5 +1,9 @@
 package com.bookbros.services;
 
+import java.util.Date;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +75,14 @@ public class PurchaseServiceImplementation implements PurchaseService {
 		String[] stringArr = auth.split(":");
 		int id = Integer.parseInt(stringArr[0]);
 		User user = ur.findById(id).get();
-		Purchase purchase = new Purchase(user, book);
+		
+//		long millis = System.currentTimeMillis();  
+//		java.sql.Date date = new java.sql.Date(millis);
+		
+		Date date = new Date();
+		Timestamp timestamp = new Timestamp(date.getTime());
+		
+		Purchase purchase = new Purchase(user, book, timestamp);
 		pr.save(purchase);
 
 		if (pr.findById(purchase.getId()) == null) {
