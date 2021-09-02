@@ -1,9 +1,5 @@
 package com.bookbros.apis;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 import org.springframework.http.ResponseEntity;
@@ -11,8 +7,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.bookbros.dtos.SearchResult;
-import com.bookbros.dtos.SelectedBook;
-import com.bookbros.models.Book;
 
 import org.json.*;
 //import org.json.simple.parser.JSONParser;
