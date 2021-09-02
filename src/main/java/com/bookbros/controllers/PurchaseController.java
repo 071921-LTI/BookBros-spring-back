@@ -7,9 +7,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bookbros.models.Book;
 import com.bookbros.models.Purchase;
 import com.bookbros.services.PurchaseService;
 
@@ -34,6 +38,13 @@ public class PurchaseController {
 	public List<Purchase> getPurchasesById(@PathVariable("id") int id) {
 		return ps.getPurchasesByPurchaserId(id);
     }
+	
+//	@PostMapping
+//	@RequestMapping("/displayHeaderInfo.do")
+//	public ResponseEntity<String> addPurchase(@RequestHeader("Authorization") String auth, @RequestBody Book book) {
+//		Purchase purchase = ps.buyBook(auth, book);
+//		return new ResponseEntity<>("added purchase " + purchase.getId(), HttpStatus.CREATED);
+//	}
 	
 //	@PostMapping
 //	public ResponseEntity<String> register(@Valid @RequestBody User user) {

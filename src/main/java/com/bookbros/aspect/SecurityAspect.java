@@ -35,8 +35,17 @@ public class SecurityAspect {
 //	@Around("@annotation(com.bookbros.annotations.Secure)")
 //	public Object secureEndpoint(ProceedingJoinPoint pjp) throws Throwable {
 
+
+//	@Around("@annotation(com.bookbros.annotations.Secure)")
+//	public Object secureEndpoint(ProceedingJoinPoint pjp) throws Throwable {
+
 	// @Around("@annotation(com.bookbros.annotations.Secured)")
 	// public Object secureEndpoint(ProceedingJoinPoint pjp) throws Throwable {
+
+
+	// @Around("@annotation(com.bookbros.annotations.Secured)")
+	// public Object secureEndpoint(ProceedingJoinPoint pjp) throws Throwable {
+
 		
 	// 	/*
 	// 	 * Retrieve the method with @Secured
@@ -71,5 +80,5 @@ public class SecurityAspect {
 		
 	// 	return target;
 	// }
-	
 }
+
