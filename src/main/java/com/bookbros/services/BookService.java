@@ -9,6 +9,7 @@ import com.bookbros.models.Book;
 public interface BookService {
 	public abstract Book getByAuthorAndTitle(String author, String title) throws BookNotFoundException;
 	public abstract List<Book> getBooks();
+	public abstract List<Book> getBooksWithInventory();
 	public abstract List<Book> getBooksByAuthor(String author);
 	public abstract boolean createBook(Work work);
 	public abstract boolean deleteBook(Book b) throws BookNotFoundException;

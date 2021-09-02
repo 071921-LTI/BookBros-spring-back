@@ -1,6 +1,6 @@
 package com.bookbros.models;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,5 +29,5 @@ public class Wishlist {
     @JoinColumn(name="book_id", nullable = false)
 	private Book book;
 	@Column(name = "date_added", updatable = false, columnDefinition = "timestamp default CURRENT_TIMESTAMP")
-	private Date dateAdded;
+	private LocalDate dateAdded;
 }
