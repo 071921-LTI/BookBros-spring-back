@@ -21,7 +21,7 @@ public class Request {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "request_id")
 	private int id;
-	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity=User.class )
+	@ManyToOne(  targetEntity=User.class ) // cascade = {CascadeType.PERSIST, CascadeType.MERGE},
     @JoinColumn(name="user_id", nullable = false)
 	private User requester;
 	@Column(name = "title")
@@ -43,6 +43,12 @@ public class Request {
 		this.description = description;
 	}
 	 
+	public Request(User requester, String title, String author) {
+		super();
+		this.requester = requester;
+		this.title = title;
+		this.author = author;
+	}
 	
 	public int getId() {
 		return id;

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bookbros.dtos.CustomerRequest;
 import com.bookbros.models.Request;
 import com.bookbros.models.User;
 import com.bookbros.services.RequestService;
@@ -44,10 +45,14 @@ public class RequestController {
 	
 	
 	@PostMapping
-	public ResponseEntity<String> addRequest(@RequestBody Request request, @RequestHeader("Authorization") String auth) {
-
-		int requesterId = Integer.valueOf(auth.split(":")[0]);
-		request.setRequester(new User(requesterId));
+	public ResponseEntity<String> addRequest(@RequestBody CustomerRequest customerRequest) { 
+		
+		
+		int requesterId = Integer.valueOf(customerRequest.getCustId());
+		User requester = new User(requesterId);
+		
+		Request request = new Request(requester, customerRequest.getTitle(), customerRequest.getAuthor()); 
+		System.out.println(request);
 		if (rs.createRequest(request)) {
 			return new ResponseEntity<>("Successfully created customer request.", HttpStatus.CREATED);
 		}
