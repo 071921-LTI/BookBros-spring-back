@@ -1,24 +1,36 @@
 package com.bookbros.services;
 
+import java.util.Date;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
-
-import com.bookbros.daos.PurchaseRepository;
-import com.bookbros.exceptions.PurchaseNotFoundException;
-import com.bookbros.models.Purchase;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bookbros.daos.BookRepository;
+import com.bookbros.daos.PurchaseRepository;
+import com.bookbros.daos.UserRepository;
+import com.bookbros.exceptions.PurchaseNotFoundException;
+import com.bookbros.models.Book;
+import com.bookbros.models.Purchase;
+import com.bookbros.models.User;
+
 @Service
 public class PurchaseServiceImplementation implements PurchaseService {
     
     private PurchaseRepository pr;
+    private BookRepository br;
+    private UserRepository ur;
 
     @Autowired
-    public PurchaseServiceImplementation(PurchaseRepository pr) {
+    public PurchaseServiceImplementation(PurchaseRepository pr, BookRepository br, UserRepository ur) {
         super();
         this.pr = pr;
+        this.br = br;
+        this.ur = ur;
     }
 
     @Override
@@ -47,7 +59,7 @@ public class PurchaseServiceImplementation implements PurchaseService {
 
     @Override
     @Transactional
-    public boolean addPurchase(Purchase p) {
+    public boolean createPurchase(Purchase p) {
         pr.save(p);
 
         if (pr.findById(p.getId()) == null) {
@@ -56,6 +68,31 @@ public class PurchaseServiceImplementation implements PurchaseService {
         
         return true;
     }
+    
+	@Override
+	@Transactional
+	public Purchase buyBook(String auth, Book book) {
+		String[] stringArr = auth.split(":");
+		int id = Integer.parseInt(stringArr[0]);
+		User user = ur.findById(id).get();
+		
+//		long millis = System.currentTimeMillis();  
+//		java.sql.Date date = new java.sql.Date(millis);
+		
+		Date date = new Date();
+		Timestamp timestamp = new Timestamp(date.getTime());
+		
+		Purchase purchase = new Purchase(user, book, timestamp);
+		pr.save(purchase);
+
+		if (pr.findById(purchase.getId()) == null) {
+			return null;
+		}
+		
+		book.setInventory(book.getInventory() - 1);
+		br.save(book);
+		return purchase;
+	}
 
     @Override
     @Transactional

@@ -26,19 +26,26 @@ public class SecurityAspect {
 	private HttpServletRequest request;
 	private UserService us;
 	
-	@Autowired
-	public SecurityAspect(HttpServletRequest request, UserService us) {
-		this.request = request;
-		this.us = us;
-	}
+//	@Autowired
+//	public SecurityAspect(HttpServletRequest request, UserService us) {
+//		this.request = request;
+//		this.us = us;
+//	}
+//
+//	@Around("@annotation(com.bookbros.annotations.Secure)")
+//	public Object secureEndpoint(ProceedingJoinPoint pjp) throws Throwable {
 
-<<<<<<< HEAD
-	@Around("@annotation(com.bookbros.annotations.Secure)")
-	public Object secureEndpoint(ProceedingJoinPoint pjp) throws Throwable {
-=======
+
+//	@Around("@annotation(com.bookbros.annotations.Secure)")
+//	public Object secureEndpoint(ProceedingJoinPoint pjp) throws Throwable {
+
 	// @Around("@annotation(com.bookbros.annotations.Secured)")
 	// public Object secureEndpoint(ProceedingJoinPoint pjp) throws Throwable {
->>>>>>> 4a1dc4f3cb9ea8aaf76207888c69da01cba865a4
+
+
+	// @Around("@annotation(com.bookbros.annotations.Secured)")
+	// public Object secureEndpoint(ProceedingJoinPoint pjp) throws Throwable {
+
 		
 	// 	/*
 	// 	 * Retrieve the method with @Secured
@@ -74,3 +81,4 @@ public class SecurityAspect {
 	// 	return target;
 	// }
 }
+
