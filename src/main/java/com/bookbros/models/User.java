@@ -60,6 +60,12 @@ public class User {
     }
 
 
+    public User(int id) {
+		super();
+		this.id = id;
+    }
+
+
     public int getId() {
 		return this.id;
 	}
