@@ -39,19 +39,8 @@ public class PurchaseController {
 		return ps.getPurchasesByPurchaserId(id);
     }
 	
-//	@PostMapping
-//	@RequestMapping("/displayHeaderInfo.do")
-//	public ResponseEntity<String> addPurchase(@RequestHeader("Authorization") String auth, @RequestBody Book book) {
-//		Purchase purchase = ps.buyBook(auth, book);
-//		return new ResponseEntity<>("added purchase " + purchase.getId(), HttpStatus.CREATED);
-//	}
-	
-//	@PostMapping
-//	public ResponseEntity<String> register(@Valid @RequestBody User user) {
-//		if (us.createUser(user)) {
-//			return new ResponseEntity<>("Successfully created user.", HttpStatus.CREATED);
-//		}
-//
-//		return new ResponseEntity<String>("Username is already taken.", HttpStatus.BAD_REQUEST);
-//	}
+	@PostMapping
+	public void addPurchase(@RequestHeader("Authorization") String auth, @RequestBody Book book) {
+		Purchase purchase = ps.buyBook(auth, book);
+	}
 }
