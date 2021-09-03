@@ -42,6 +42,15 @@ public class Request {
 		this.author = author;
 		this.description = description;
 	}
+	
+	public Request(int id, User requester, String title, String author, String description) {
+		super();
+		this.id = id;
+		this.requester = requester;
+		this.title = title;
+		this.author = author;
+		this.description = description;
+	}
 	 
 	public Request(User requester, String title, String author) {
 		super();
