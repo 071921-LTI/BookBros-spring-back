@@ -45,4 +45,12 @@ public class Purchase {
 		this.book = book;
 		this.datePurchased = datePurchased;
 	}
+	
+	public Purchase(int id, User purchaser, Book book, Timestamp datePurchased) {
+		super();
+		this.id = id;
+		this.purchaser = purchaser;
+		this.book = book;
+		this.datePurchased = datePurchased;
+	}
 }

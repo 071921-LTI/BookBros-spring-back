@@ -30,4 +30,12 @@ public class Wishlist {
 	private Book book;
 	@Column(name = "date_added", updatable = false, columnDefinition = "timestamp default CURRENT_TIMESTAMP")
 	private LocalDate dateAdded;
+	
+	public Wishlist(int id, User wisher, Book book, LocalDate dateAdded) {
+		super();
+		this.id = id;
+		this.wisher = wisher;
+		this.book = book;
+		this.dateAdded = dateAdded;
+	}
 }
