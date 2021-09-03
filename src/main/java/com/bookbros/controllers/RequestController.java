@@ -66,7 +66,7 @@ public class RequestController {
 
 	@PutMapping("/{requestId}")
 	public ResponseEntity<String> acceptRequest(@PathVariable("requestId") String requestId, @RequestBody Work work) {
-		rs.approveRequest(Integer.valueOf(requestId), work)
+		rs.approveRequest(Integer.valueOf(requestId), work);
 		return new ResponseEntity<>("Request Approved", HttpStatus.CREATED);
 	}
 
