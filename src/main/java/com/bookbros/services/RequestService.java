@@ -20,6 +20,7 @@ public class RequestService {
 	public RequestService(RequestRepository rr, BookService bs) {
 		super();
 		this.rr = rr;
+		this.bs = bs;
 	}
 	
 	@Transactional
