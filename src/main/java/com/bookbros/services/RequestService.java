@@ -7,15 +7,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bookbros.daos.RequestRepository;
+import com.bookbros.dtos.Work;
 import com.bookbros.models.Request;
 
 @Service
 public class RequestService {
 
 	private RequestRepository rr;
+	private BookService bs;
 	
 	@Autowired
-	public RequestService(RequestRepository rr) {
+	public RequestService(RequestRepository rr, BookService bs) {
 		super();
 		this.rr = rr;
 	}
@@ -42,6 +44,18 @@ public class RequestService {
 		} else {
 			return true;
 		}
+	}
+
+	@Transactional
+	public boolean approveRequest(int requestId, Work work) {
+
+		if (bs.createBook(work)) {
+			rr.deleteById(requestId);
+			if (rr.findById(requestId) == null) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	
