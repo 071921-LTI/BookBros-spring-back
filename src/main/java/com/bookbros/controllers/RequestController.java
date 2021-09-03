@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -58,5 +59,14 @@ public class RequestController {
 		}
 		return new ResponseEntity<>("Could not make customer request.", HttpStatus.BAD_REQUEST);
 		
+	}
+
+	@DeleteMapping
+	public ResponseEntity<String> rejectRequest(@RequestBody Request customerRequest) {
+		if (rs.deleteRequest(customerRequest)) {
+			return new ResponseEntity<>("Rejected Request", HttpStatus.OK);
+		}
+
+		return new ResponseEntity<>("Could not Reject Request", HttpStatus.BAD_REQUEST);
 	}
 }
