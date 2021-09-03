@@ -11,6 +11,10 @@ public interface BookService {
 	public abstract List<Book> getBooks();
 	public abstract List<Book> getBooksWithInventory();
 	public abstract List<Book> getBooksByAuthor(String author);
+	public abstract List<Book> findByTitleContaining(String title);
+	public abstract List<Book> findByTitleContainingAndInventoryGreaterThan(String title, int inventory);
+	public abstract List<Book> findByAuthorContaining(String author);
+	public abstract List<Book> findByAuthorContainingAndInventoryGreaterThan(String author, int inventory);
 	public abstract boolean createBook(Work work);
 	public abstract boolean deleteBook(Book b) throws BookNotFoundException;
 	public abstract boolean updateBook(Book b) throws BookNotFoundException;

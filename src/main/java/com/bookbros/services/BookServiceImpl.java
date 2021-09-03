@@ -88,12 +88,6 @@ public class BookServiceImpl implements BookService {
 		SelectedBook selectedBook = new SelectedBook(jsonBook.getString("title"), description, subjectsArray);
 
 		Book newBook = new Book(selectedBook.getTitle(), work.getAuthor_name()[0], work.getPrice(), String.valueOf(work.getFirst_publish_year()), selectedBook.getDescription(), String.join(", ", selectedBook.getSubjects()), work.getInventory());
-//<<<<<<< HEAD
-		
-		System.out.println(newBook);
-		
-//=======
-//>>>>>>> 844adad631927e11e0cd88d783ce6ef4cf8d1dd4
 		br.save(newBook);
 
 		if(br.findById(newBook.getId()) == null) {
@@ -126,5 +120,25 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public List<Book> getBooksWithInventory() {
 		return br.findByInventoryGreaterThan(0);
+	}
+
+	@Override
+	public List<Book> findByTitleContaining(String title) {
+		return br.findByTitleContaining(title);
+	}
+	
+	@Override
+	public List<Book> findByTitleContainingAndInventoryGreaterThan(String title, int inventory) {
+		return br.findByTitleContainingAndInventoryGreaterThan(title, inventory);
+	}
+
+	@Override
+	public List<Book> findByAuthorContaining(String author) {
+		return br.findByAuthorContaining(author);
+	}
+
+	@Override
+	public List<Book> findByAuthorContainingAndInventoryGreaterThan(String author, int inventory) {
+		return br.findByAuthorContainingAndInventoryGreaterThan(author, inventory);
 	}
 }
