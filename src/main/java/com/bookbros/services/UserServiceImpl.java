@@ -23,8 +23,8 @@ public class UserServiceImpl implements UserService {
 	
 
 	@Transactional
-	public User getById(int id) throws UserNotFoundException {
-		return ur.findById(id).orElseThrow(UserNotFoundException::new);
+	public User getById(int id) {
+		return ur.findById(id).get();
 	}
 	
 	@Transactional
