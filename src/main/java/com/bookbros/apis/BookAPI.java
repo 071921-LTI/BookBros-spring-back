@@ -15,12 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 @Component
-public class BookAPI {
-
-
-
-
-	
+public class BookAPI {	
 	public JSONObject getSelectedBook(String key) {
 
 		
