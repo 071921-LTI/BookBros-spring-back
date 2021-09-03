@@ -89,5 +89,15 @@ public class BookAPI {
 		return result;
 			
 	}	
+
+	public SearchResult searchAuthorAndTitle(String title, String author) {
+		String url = "http://openLibrary.org/search.json?title=" + title + "&author=" + author;
+
+		RestTemplate rt = new RestTemplate();
+		ResponseEntity<SearchResult> response = rt.getForEntity(url, SearchResult.class);
+		SearchResult result = response.getBody();
+
+		return result;
+	}
 }
 

@@ -8,14 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bookbros.dtos.CustomerRequest;
+import com.bookbros.dtos.Work;
 import com.bookbros.models.Request;
 import com.bookbros.models.User;
 import com.bookbros.services.RequestService;
@@ -58,5 +62,17 @@ public class RequestController {
 		}
 		return new ResponseEntity<>("Could not make customer request.", HttpStatus.BAD_REQUEST);
 		
+	}
+
+	@PutMapping("/{requestId}")
+	public ResponseEntity<String> acceptRequest(@PathVariable("requestId") String requestId, @RequestBody Work work) {
+		rs.approveRequest(Integer.valueOf(requestId), work);
+		return new ResponseEntity<>("Request Approved", HttpStatus.CREATED);
+	}
+
+	@DeleteMapping
+	public ResponseEntity<String> rejectRequest(@RequestBody Request customerRequest) {
+		rs.deleteRequest(customerRequest);
+		return new ResponseEntity<>("Rejected Request", HttpStatus.OK);
 	}
 }
