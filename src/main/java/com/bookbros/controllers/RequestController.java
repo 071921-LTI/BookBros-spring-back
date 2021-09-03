@@ -66,19 +66,13 @@ public class RequestController {
 
 	@PutMapping("/{requestId}")
 	public ResponseEntity<String> acceptRequest(@PathVariable("requestId") String requestId, @RequestBody Work work) {
-		if (rs.approveRequest(Integer.valueOf(requestId), work)) {
-			return new ResponseEntity<>("Request Approved", HttpStatus.CREATED);
-		}
-
-		return new ResponseEntity<>("Could not Approve Request", HttpStatus.BAD_REQUEST);
+		rs.approveRequest(Integer.valueOf(requestId), work)
+		return new ResponseEntity<>("Request Approved", HttpStatus.CREATED);
 	}
 
 	@DeleteMapping
 	public ResponseEntity<String> rejectRequest(@RequestBody Request customerRequest) {
-		if (rs.deleteRequest(customerRequest)) {
-			return new ResponseEntity<>("Rejected Request", HttpStatus.OK);
-		}
-
-		return new ResponseEntity<>("Could not Reject Request", HttpStatus.BAD_REQUEST);
+		rs.deleteRequest(customerRequest);
+		return new ResponseEntity<>("Rejected Request", HttpStatus.OK);
 	}
 }
