@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +18,32 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.bookbros.apis.BookAPI;
 import com.bookbros.daos.BookRepository;
+import com.bookbros.dtos.SelectedBook;
+import com.bookbros.dtos.Work;
 import com.bookbros.models.Book;
 import com.bookbros.services.BookServiceImpl;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest(classes= {BookServiceImpl.class, BookAPI.class})
 public class BookServiceTest {
 	
 	@Autowired
 	private BookServiceImpl bookService;
+	@Autowired
+	private BookAPI bp;
 	
 	@MockBean
 	private BookRepository mockBookRepository;
+	@MockBean
+	private BookAPI mockApi;
+	
+	ObjectMapper mapper = new ObjectMapper();
 	
 	static Book mockBook;
 	static Book mockBook2;
+	static Work mockW;
+	static SelectedBook mockS;
 	static Optional<Book> mockBookO;
 	static Optional<Book> mockBookO2;
 	static List<Book> mockBooks; 
@@ -38,6 +52,10 @@ public class BookServiceTest {
 	public static void setUp(){
 		Book b1 = new Book(1, "title1", "author1", 1, "date", "description", "subjects", 0);
 		Book b2 = new Book(2, "title2", "author2", 2, "date", "description", "subjects", 0);
+		String[] array = new String[] {"one", "two"};
+		
+		SelectedBook s = new SelectedBook("title", "description", array);
+		Work w = new Work("key","title", array, 1111, 20.0, 1);
 		
 		mockBooks = new ArrayList<>();
 		mockBooks.add(b1);
@@ -47,6 +65,48 @@ public class BookServiceTest {
 		mockBookO2 = Optional.of(b2);
 		mockBook = b1;
 		mockBook2 = b2;
+		
+		mockW = w;
+		mockS = s;
+	}
+	
+	@Test
+	public void createBookValid() {
+		
+		//Creates JSON object from selected book
+		JSONObject mJSONObject = null;
+		try {
+			String jsonInString = mapper.writeValueAsString(mockS);
+			mJSONObject = new JSONObject(jsonInString);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		
+		when(mockApi.getSelectedBook(mockW.getKey())).thenReturn(mJSONObject);
+		
+		assertEquals(true, bookService.createBook(mockW));
+	}
+	
+	@Test
+	public void createBookInvalid() {
+		
+		//Creates JSON object from selected book
+		JSONObject mJSONObject = null;
+		try {
+			String jsonInString = mapper.writeValueAsString(mockS);
+			mJSONObject = new JSONObject(jsonInString);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		
+		when(mockApi.getSelectedBook(mockW.getKey())).thenReturn(mJSONObject);
+		when(mockBookRepository.findById(0)).thenReturn(null);
+		
+		assertEquals(false, bookService.createBook(mockW));
 	}
 	
 	@Test
@@ -56,12 +116,12 @@ public class BookServiceTest {
 		assertEquals(mockBook, bookService.getByAuthorAndTitle("title1", "author1"));
 	}
 	
-//	@Test
-//	public void getByAuthorAndTitleInvalid() {
-//		when(mockBookRepository.findByAuthorAndTitle("title3", "author3")).thenReturn(null);
-//		
-//		assertThrows(null, () -> bookService.getByAuthorAndTitle("title3", "author3"));
-//	}
+	@Test
+	public void getByAuthorAndTitleInvalid() {
+		when(mockBookRepository.findByAuthorAndTitle("author3", "title3")).thenReturn(null);
+		
+		assertEquals(null, bookService.getByAuthorAndTitle("author3", "title3"));
+	}
 	
 	@Test
 	public void getBooks() {
@@ -91,16 +151,16 @@ public class BookServiceTest {
 		assertEquals(false, bookService.deleteBook(mockBook));
 	}
 	
-//	@Test
-//	public void updateBookValid() {
-//		when(mockBookRepository.findByAuthorAndTitle(mockBook.getTitle(), mockBook.getAuthor())).thenReturn(mockBook);
-//		
-//		assertEquals(true, bookService.updateBook(mockBook));
-//	}
+	@Test
+	public void updateBookValid() {
+		when(mockBookRepository.findByAuthorAndTitle(mockBook.getAuthor(), mockBook.getTitle())).thenReturn(mockBook);
+		
+		assertEquals(true, bookService.updateBook(mockBook));
+	}
 	
 	@Test
 	public void updateBookInvalid() {
-		when(mockBookRepository.findByAuthorAndTitle("title1", "author1")).thenReturn(null);
+		when(mockBookRepository.findByAuthorAndTitle("author1", "title1")).thenReturn(null);
 		
 		assertEquals(false, bookService.updateBook(mockBook));
 	}

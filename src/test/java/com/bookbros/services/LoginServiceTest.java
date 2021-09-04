@@ -17,8 +17,8 @@ import com.bookbros.services.LoginServiceImpl;
 @SpringBootTest(classes= {LoginServiceImpl.class})
 public class LoginServiceTest {
 
-	User user = new User(1, "newUser", "password", "first");
-	User user2 = new User(2, "newUser2", "password2", "first2");
+	User user = new User(1, "newUser", "password", "Customer");
+	User user2 = new User(2, "newUser2", "password2", "Employee");
 	String token = "1:" + "Customer";
 	String token2 = "2:" + "Employee";
 	Credentials creds = new Credentials("newUser", "password");
@@ -32,7 +32,7 @@ public class LoginServiceTest {
 	@Test
 	public void loginSuccess() {
 			Mockito.when(mockUserRepository.findByUsername("newUser")).thenReturn(user);
-			assertEquals("1:first", loginService.login(creds));
+			assertEquals("1:Customer", loginService.login(creds));
 	}
 		
 		@Test
@@ -51,4 +51,26 @@ public class LoginServiceTest {
 					e.printStackTrace();
 				}
 	}
+		
+		@Test
+		public void authorizeValid() {
+			Mockito.when(mockUserRepository.getById(1)).thenReturn(user);
+			try {
+				assertEquals(true, loginService.authorize(token));
+			} catch (UserNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		@Test
+		public void authorizeInvalid() {
+			Mockito.when(mockUserRepository.getById(2)).thenReturn(user);
+			try {
+				assertEquals(false, loginService.authorize(token2));
+			} catch (UserNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 }
