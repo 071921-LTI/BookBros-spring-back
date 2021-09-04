@@ -43,22 +43,27 @@ public class PurchaseServiceTest {
 	@MockBean
 	private UserRepository mockUserRepository;
 	
+	static Purchase mock0;
 	static Purchase mock;
 	static Purchase mock2;
 	static String token;
-	static User user;
+	static Optional<User> user;
 	static Optional<Book> book;
 	static Optional<Purchase> mockO;
 	static Optional<Purchase> mockO2;
 	static List<Purchase> mocks; 
+	static Timestamp timestamp;
 	
 	@BeforeAll
 	public static void setUp(){
+		user = Optional.of(new User(1, "Tommy", null, null));
+		
 		User user = new User(1, "Tommy", null, null);
 		Book book = new Book(1, "title1", "author1", 1, "date", "description", "subjects", 0);
 
-		Timestamp timestamp = new Timestamp(0);
+		timestamp = new Timestamp(0);
 		
+		Purchase p0 = new Purchase(0, user, book, timestamp);
 		Purchase p1 = new Purchase(1, user, book, timestamp);
 		Purchase p2 = new Purchase(2, user, book, timestamp);
 		token = "1:Customer";
@@ -69,6 +74,7 @@ public class PurchaseServiceTest {
 		
 		mockO = Optional.of(p1);
 		mockO2 = Optional.of(p2);
+		mock0 = p0;
 		mock = p1;
 		mock2 = p2;
 		
@@ -93,19 +99,24 @@ public class PurchaseServiceTest {
 		assertThrows(EntityNotFoundException.class, () -> purchaseService.getPurchaseById(5));
 	}
 	
-	
-	
-
 	@Test
 	public void buyBookValid() {
-		when(mockUserRepository.findById(1).get()).thenReturn(user);
-		when(mockBookRepository.findById(1)).thenReturn(book);
+		when(mockUserRepository.findById(1)).thenReturn(user);
+		when(mockPurchaseRepository.findById(0)).thenReturn(mockO);
 		
-		assertEquals(mock, purchaseService.buyBook(token, mock.getBook()));
+		Purchase purchase = purchaseService.buyBook(token, mock.getBook());
+		purchase.setDatePurchased(timestamp);
+		
+		assertEquals(mock0, purchase);
 	}
 	
-	
-	
+	@Test
+	public void buyBookInvalid() {
+		when(mockUserRepository.findById(1)).thenReturn(user);
+		when(mockPurchaseRepository.findById(0)).thenReturn(null);
+		
+		assertEquals(null, purchaseService.buyBook(token, mock.getBook()));
+	}
 	
 	@Test
 	public void getPurchases() {
