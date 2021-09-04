@@ -1,4 +1,4 @@
-package com.bookbros;
+package com.bookbros.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
