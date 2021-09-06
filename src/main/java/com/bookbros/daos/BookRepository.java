@@ -15,4 +15,6 @@ public interface BookRepository extends JpaRepository<Book, Integer>{
 	List<Book> findByTitleContainingAndInventoryGreaterThan(String title, int inventory);
 	List<Book> findByAuthorContaining(String author);
 	List<Book> findByAuthorContainingAndInventoryGreaterThan(String author, int inventory);
+	List<Book> findBySubjectsContaining(String subject);
+	List<Book> findBySubjectsContainingAndInventoryGreaterThan(String subject, int inventory);
 }

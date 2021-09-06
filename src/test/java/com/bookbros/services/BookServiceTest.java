@@ -199,5 +199,18 @@ public class BookServiceTest {
 		
 		assertEquals(mockBooks, bookService.findByAuthorContainingAndInventoryGreaterThan("author1", 0));
 	}
-
+	
+	@Test
+	public void findBySubjectsContaining() {
+		when(mockBookRepository.findBySubjectsContaining("author1")).thenReturn(mockBooks);
+		
+		assertEquals(mockBooks, bookService.findBySubjectsContaining("author1"));
+	}
+	
+	@Test
+	public void findBySubjectsContainingAndInventoryGreaterThan() {
+		when(mockBookRepository.findBySubjectsContainingAndInventoryGreaterThan("author1", 0)).thenReturn(mockBooks);
+		
+		assertEquals(mockBooks, bookService.findBySubjectsContainingAndInventoryGreaterThan("author1", 0));
+	}
 }
