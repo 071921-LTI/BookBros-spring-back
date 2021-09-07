@@ -1,5 +1,5 @@
   
-package com.bookbros.services;
+package com.bookbros;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

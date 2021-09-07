@@ -141,4 +141,14 @@ public class BookServiceImpl implements BookService {
 	public List<Book> findByAuthorContainingAndInventoryGreaterThan(String author, int inventory) {
 		return br.findByAuthorContainingAndInventoryGreaterThan(author, inventory);
 	}
+	
+	@Override
+	public List<Book> findBySubjectsContaining(String subject) {
+		return br.findBySubjectsContaining(subject);
+	}
+
+	@Override
+	public List<Book> findBySubjectsContainingAndInventoryGreaterThan(String subject, int inventory) {
+		return br.findBySubjectsContainingAndInventoryGreaterThan(subject, inventory);
+	}
 }

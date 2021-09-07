@@ -39,6 +39,18 @@ public class Book {
 	public Book() {
 		super();
 	}
+	
+	public Book(int id, String title, String author, double price, String published, String description, String subjects, int inventory) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.author = author;
+		this.price = price;
+		this.published = published;
+		this.description = description;
+		this.subjects = subjects;
+		this. inventory = inventory;
+	}
 
 	public Book(String title, String author, double price, String published, String description, String subjects, int inventory) {
 		super();
